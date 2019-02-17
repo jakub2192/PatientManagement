@@ -1,0 +1,25 @@
+<table class="table table-border table-hover">
+  <tbody>
+  <tr *ngFor='let patient of patients; let i = index' (click)="openPatientDetail(patient)">
+    <td>{{i + 1}}</td>
+    <td>{{patient.name}}</td>
+    <td>{{patient.surname}}</td>
+  </tr>
+  </tbody>
+</table>
+<button class="button" (click)="setCreating()">Add Patient</button>
+
+
+<div *ngIf="patient">
+  <button class="button" (click)="goBack()">Close</button>
+  <div class="card">
+    <img [src]="patient.photo" *ngIf="patient.photo">
+    <h1>{{patient.degree}} {{patient.name}} {{patient.surname}}</h1>
+    <p>{{patient.address}}</p>
+  </div>
+</div>
+
+<div *ngIf="isCreating" id="addPatient">
+  <button class="button" type="button" (click)="goBack()">Close</button>
+  <app-detail (setPatient)="savePatient($event)"></app-detail>
+</div>
